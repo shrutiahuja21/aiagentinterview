@@ -9,35 +9,7 @@ A scalable, modular, real-time AI Interview Agent built with modern AI, streamin
 - **Real-Time Security Enforcement**: The UI logs all suspicious events (e.g. Tab Switching, Gaze shifting, Window minimizing) and immutably audits them.
 - **Automated Interview Summary**: A final scoring rubric breaks down technical depth, duration, and spits out a binary `PROCEED / REJECT` score.
 
-## 🏗 System Architecture Diagram
 
-```mermaid
-graph TD
-    subgraph Frontend (React + Vite)
-        A[Candidate Video Stream] --> C(Media Processing Layer)
-        B[Full Screen Share] --> C
-        C --> D[WebRTC / Local Recorder]
-        M[Web Speech API] --> N(Live UI Visuals)
-    end
-
-    subgraph Audio Transfer
-        D -- "POST Multipart (Audio Blob)" --> E
-    end
-
-    subgraph Backend Microservice (FastAPI Agent)
-        E[FastAPI API Gateway] --> F{OpenAI Whisper STT}
-        F -- Transcribed Text --> G[Orchestrator]
-        G -- Prompt Injection --> H[OpenAI GPT-4o-mini]
-        H -- "JSON {next_question, agent_notes}" --> G
-        G -- Return Output Payload --> I[Frontend UI]
-    end
-
-    subgraph Real-Time Evaluation Engine
-        I --> J[Sidebar: AI Notes Render]
-        I --> K[TTS: Speech Synthesis Feedback] 
-        I --> L[Auditing: Event Security Log]
-    end
-```
 
 ## 🎥 Walkthrough / Demo
 1. Run `npm run dev` to start the frontend on `http://localhost:5173`.
