@@ -1,0 +1,13 @@
+livekit-agents
+livekit-plugins-openai
+livekit-plugins-deepgram
+livekit-plugins-elevenlabs
+python-dotenv
+asyncio
+loguru
+opencv-python
+pillow
+fastapi
+uvicorn
+livekit
+pydantic
