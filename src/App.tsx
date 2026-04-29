@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Camera, Mic, CheckCircle2, MicOff, UserCheck, Download } from 'lucide-react';
+import { Camera, Mic, CheckCircle2, UserCheck, Download } from 'lucide-react';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { motion } from 'framer-motion';
@@ -10,9 +10,6 @@ export default function App() {
   const [interviewStarted, setInterviewStarted] = useState(false);
   const [interviewComplete, setInterviewComplete] = useState(false);
   
-  const [cameraActive, setCameraActive] = useState(false);
-  const [micActive, setMicActive] = useState(false);
-  const [screenActive, setScreenActive] = useState(false);
   const [isMockMode, setIsMockMode] = useState(false);
   
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
@@ -152,14 +149,11 @@ export default function App() {
       // 1. Prompt for camera and mic
       const cStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       setMediaStream(cStream);
-      setCameraActive(true);
-      setMicActive(true);
       
       // 2. Prompt for Screen Share (Crucial for monitoring)
       try {
         const sStream = await navigator.mediaDevices.getDisplayMedia({ video: true });
         setDisplayStream(sStream);
-        setScreenActive(true);
       } catch (sErr) {
         console.warn("Screen share denied. Proctored session needs screen access.");
         alert("Screen sharing is mandatory for this proctored audit. Please allow entire screen sharing.");
